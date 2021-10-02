@@ -8,11 +8,10 @@ const app = express();
 
 const PORT = process.env.PORT || 1337
 
-mongoose.connect(process.env.dbURL, () => {
-  app.listen(PORT, () => {
-  console.log(`the server started on localhost:${PORT}`)
-  })
+app.listen(PORT, () => {
+console.log(`the server started on localhost:${PORT}`)
 })
+mongoose.connect(process.env.dbURL)
 
 app.use(cors())
 app.use(express.json())
