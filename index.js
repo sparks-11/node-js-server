@@ -1,3 +1,4 @@
+require("dotenv").config()
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
@@ -12,7 +13,7 @@ app.listen(PORT, () => {
 console.log(`the server started on localhost:${PORT}`)
 })
 
-mongoose.connect(process.env.dbURL,)
+mongoose.connect(process.env.DB_URL)
 
 app.use(cors())
 app.use(express.json())
@@ -40,4 +41,14 @@ app.post('/api/result', async (req, res) => {
     
 })
 
-// removed load data
+app.get("/data",async (req, res) => {
+  try {
+    const user = await Details.findOne({
+    name: req.body.name,
+    crushName: req.body.crushName
+    })
+    res.json({status:"ok", user: user})
+  } catch (err) {
+    res.json({status:"bad", error:err})
+  }
+})
