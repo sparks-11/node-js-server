@@ -30,8 +30,8 @@ app.post('/api/result', async (req, res) => {
     })
     if (!user) {
         await Details.create({
-        name: req.body.name,
-        crushName: req.body.crushName,
+        name: req.body.name.trim(),
+        crushName: req.body.crushName.trim(),
         resultStmt: fortune
     })
     res.json({status:"ok", user: fortune})
@@ -44,8 +44,8 @@ app.post('/api/result', async (req, res) => {
 app.get("/data",async (req, res) => {
   try {
     const user = await Details.findOne({
-    name: req.body.name,
-    crushName: req.body.crushName
+    name: req.body.name.trim(),
+    crushName: req.body.crushName.trim()
     })
     res.json({status:"ok", user: user})
   } catch (err) {
