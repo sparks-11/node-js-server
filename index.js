@@ -39,3 +39,5 @@ app.post('/api/result', async (req, res) => {
     }
     
 })
+
+// removed load data
