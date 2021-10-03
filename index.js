@@ -8,10 +8,11 @@ const app = express();
 
 const PORT = process.env.PORT || 1337
 
-app.listen(PORT, () => {
-console.log(`the server started on localhost:${PORT}`)
+mongoose.connect(process.env.dbURL, () => {
+  app.listen(PORT, () => {
+  console.log(`the server started on localhost:${PORT}`)
+  })
 })
-mongoose.connect(process.env.dbURL)
 
 app.use(cors())
 app.use(express.json())
@@ -37,12 +38,4 @@ app.post('/api/result', async (req, res) => {
       res.json({ status: "ok", user: user.resultStmt})
     }
     
-})
-
-app.get("/api/quote", async (req, res) => {
-  const userData = req.headers[ "x-access-data"]
-  res.json({
-    status: "ok",
-    quote:userData
-  })
 })
